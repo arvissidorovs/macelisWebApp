@@ -16,7 +16,6 @@
                 <div class="wrap-login100">
                     <span class="login100-form-title p-b-26">
                         <img src="../img/maceklis_logo.png" />
-                        <img src="../../img/maceklis_logo.png" />
                     </span>
                     <span class="login100-form-title p-b-48">
                         <i class="zmdi zmdi-font"></i>

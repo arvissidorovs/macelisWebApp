@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
 }
 
 if (logedin() > 0) {
-    $sablons = 'index.html';
+    $sablons = 'index.php';
     $fileopen = fopen($sablons, "r");
     $page = fread($fileopen, filesize($sablons));
     $page = str_replace('var load_comment_id = 0;', 'var load_comment_id = ' . $load_comment_id . ';', $page);
