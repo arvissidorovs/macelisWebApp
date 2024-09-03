@@ -70,7 +70,7 @@ $("#div_comments").html('Notiek ielāde...');
 $("#div_comments").html('');	
 	
 	
-var url = '/php/load_bible_comments.php?ofset='+ofset+'&b='+b;		
+var url = '/php/comments/load_bible_comments.php?ofset='+ofset+'&b='+b;		
 	
   $.ajax({url: url, success: function(result){
 	 o = JSON.parse(result); 
@@ -80,31 +80,6 @@ var url = '/php/load_bible_comments.php?ofset='+ofset+'&b='+b;
 		var id = o.comemnts[0].id;
 		var title = o.comemnts[0].title;
 		var html = o.comemnts[0].html;
-		  
-	  /**/
-	 /*var comemnts = o.comemnts;
-	 var i=0;
-		while (i < comemnts.length) {
-		  	var coment_id = comemnts[i].id;	
-    	  	var coment_title = comemnts[i].title;
-		  	var coment_html = comemnts[i].html;
-		  	var html = '<div id="div_comment_'+coment_id+'"'+
-							'<div>'+
-								'<a href="#" style="float: right; color:#D3D3D3;" onclick="open_edit_comment('+coment_id+')">Labot</a>'+
-							'</div>'+
-							'<a type="button">'+
-								'<div class="comment-verse vertical-hr" style="overflow: hidden;" onclick="toggle_comment_html('+coment_id+')">'+
-								coment_title+ //coment_html+
-								'</div>'+
-							'</a>'+
-							'<div style="font-family: Linguistics Pro;  display:none;" class="mb-4-5" id="div_comment_html'+coment_id+'" >'+
-							coment_html+
-							'</div>'+
-						'</div>';
-	 		$("#div_comments").append(html);
-			i++;
-		}
-	}*/
 		
 	var comemnts = o.comemnts;
 	 var i=0;
@@ -164,7 +139,7 @@ function load_dictionary(ofset){
 
 $("#div_dictionary").html('Notiek ielāde...');	
 	
-var url = '/php/load_dictionary.php?ofset='+ofset;		
+var url = '/php/dictionary/load_dictionary.php?ofset='+ofset;		
 	
   $.ajax({url: url, success: function(result){
 	  o = JSON.parse(result); 
@@ -234,7 +209,7 @@ function showDescription(tag_id) {
 
 function load_comment_books(tr){	
 $("#div_comments").html('Lūdzu izvēlies nodaļu!');		
-var url = 'php/load_comment_books.php?tr=lv';	
+var url = 'php/comments/load_comment_books.php?tr=lv';	
 	
   $.ajax({url: url, success: function(result){ 
 	 o = JSON.parse(result);
