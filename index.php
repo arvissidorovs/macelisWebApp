@@ -537,24 +537,21 @@ session_start();
     <!-- End content -->
 		</div>
 <!-- End wrapper -->
-	
-	<!--<script src="js/jquery-3.1.1.min.js"></script>-->
+ 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="js/jquery.steps.min.js"></script>
-	<script src="js/flickity.min.js"></script>
-	<script src="js/bootstrap.bundle.js"></script>
+	<script src="js/static/jquery.steps.min.js"></script>
+	<script src="js/static/flickity.min.js"></script>
+	<script src="js/static/bootstrap.bundle.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
-	<script src="js/typed.min.js"></script>
-	<script src="js/smooth-scroll.min.js"></script>
-	<script src="js/scripts.js?1"></script>
-	<script src="js/wow.js"></script>
+	<script src="js/static/typed.min.js"></script>
+	<script src="js/static/smooth-scroll.min.js"></script>
+	<script src="js/static/scripts.js?1"></script>
+	<script src="js/static/wow.js"></script>
 	<script src="js/get_settings.js?1"></script>
 	<script src="js/load_bible_json.js?16"></script>
 	<script src="js/bible_comments.js?13"></script>
 	<script src="js/translations.js?2"></script>	
-		
-<!-- include summernote js -->
-<script src="editor/summernote-0.8.18-dist/summernote-lite.js"></script>			
+	<script src="editor/summernote-0.8.18-dist/summernote-lite.js"></script>			
 		
 <script>
 
