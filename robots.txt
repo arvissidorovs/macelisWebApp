@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /search
+Disallow: /editor
+Crawl-delay: 5
+
+Allow: /
+
+# Sitemap location
+Sitemap: https://maceklis.lv/sitemap.xml
