@@ -363,7 +363,7 @@ window.onclick = function(event) {
 
 function saveColorSelection(verseId, color) {
     $.ajax({
-        url: 'php/save_color.php',
+        url: 'php/user_color/save_color.php',
         method: 'POST',
         data: {
             verse_id: verseId,
@@ -412,7 +412,7 @@ function showCommentModal(verseId) {
 
 function fetchCommentForVerse(verseId) {
     $.ajax({
-        url: 'php/get_comment.php',
+        url: 'php/user_comment/get_comment.php',
         method: 'GET',
         data: {
             verse_id: verseId
@@ -451,7 +451,7 @@ function removeComment() {
     }
 
     $.ajax({
-        url: 'php/remove_comment.php',
+        url: 'php/user_comment/remove_comment.php',
         method: 'POST',
         data: {
             verse_id: selectedVerseId
@@ -482,7 +482,7 @@ function saveComment() {
     const verseId = selectedVerseId;
 
     $.ajax({
-        url: 'php/save_comment.php',
+        url: 'php/user_comment/save_comment.php',
         method: 'POST',
         data: {
             verse_id: verseId,
@@ -836,7 +836,7 @@ function load_bible_search_results(tr,search){
 
 $("#div_bible_results").html('Notiek meklēšana...');	
 	
-var url = 'php/bible_search.php?tr='+tr+'&s='+search;			
+var url = 'php/search/bible_search.php?tr='+tr+'&s='+search;			
 	
   $.ajax({url: url, success: function(result){
 	 o = JSON.parse(result); 
@@ -927,64 +927,14 @@ $( "#input_search" ).on( "keypress", function( event ) {
 		  $("#div_bible_results").html('Lūdzu ieraksti meklējamo frāzi!');	
 	  }
   }
-	//else alert(1);
-	/*
-  xTriggered++;
-  var msg = "Handler for `keypress` called " + xTriggered + " time(s).";
-  $.print( msg, "html" );
-  $.print( event );
-  */
 } );
 
 $( "#input_search" ).on( "focus", function() {
   show_section_bible_results();
 } );
 
-
-
-//load and add bille coments
-
-/*function load_c_json_coments(b,c){
-
-var url = 'php/load_c_json_coments.php?b='+b+'&c='+c+'';		
-	
-  $.ajax({url: url, success: function(result){
-
-	 o = JSON.parse(result); 
-	 chapter_html = '';
-	  if (o.varr.length>0) {
-		  //alert(b+c);
-		  coments_arr_set(b,c,o.varr);
-		  console.log(coments_arr_get(b,c));
-		  
-		  i=0;
-		  
-		while (i < o.varr.length) {
-    	  var v = o.varr[i].v;
-		  var v_to = o.varr[i].v_to;
-			if (v_to == 0 || v_to < v) {v_to = v;}
-				var vi = v;
-				while (vi <= v_to) {
-				$('#verse_id_'+vi).addClass("verse_has_coment");
-				vi++;
-				}
-		  //var html = o.varr[i].html;
-			//$('#verse_id_'+v).addClass("verse_has_coment");
-			
-			
-	
-	 		i++;
-		}
-	 } 
-
-
-  }});
-
-};*/
-	
-
 function load_c_json_coments(b, c) {
-    var url = 'php/load_c_json_coments.php?b=' + b + '&c=' + c;
+    var url = 'php/comments/load_c_json_coments.php?b=' + b + '&c=' + c;
 
     $.ajax({
         url: url,
@@ -1117,7 +1067,7 @@ function load_user_comments(book, chapter) {
         return;
     }
 	
-    var url = 'php/load_c_json_user_comments.php?book=' + book + '&chapter=' + chapter;
+    var url = 'php/user_comments/load_c_json_user_comments.php?book=' + book + '&chapter=' + chapter;
     $.ajax({
         url: url,
         dataType: 'json',
