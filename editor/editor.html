@@ -1,0 +1,311 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Labot</title>
+    <script src="summernote-0.8.18-dist/jquery-3.4.1.slim.min.js"></script>
+    <link href="summernote-0.8.18-dist/summernote-lite.min.css" rel="stylesheet">
+	  
+	<style>  
+	 .note-editable { height: calc(100vh - 180px);  width: calc(90vw - 150px);} 
+	</style>  
+    <script src="summernote-0.8.18-dist/summernote-lite.min.js"></script>
+  </head>
+  <body>
+	
+	  <div style="display: inline-block;"> 
+	<label for="fname">#</label>	  
+  	<input style="display: inline-block; width:50px;" type="text" id="editor_comment_id"  readonly> 
+	</div> 
+	 <div style="display: inline-block;"> 
+	 <label for="fname">Virsraksts</label>
+  	<input style="display: inline-block; width:200px;" type="text" id="editor_comment_title"> 
+		 
+	&nbsp;Rakstvieta <select id="editor_comment_b">
+<option value="0" chapters= "28" >Grāmata</option>		
+<option value="40" chapters= "28" >Mt.</option>
+<option value="41" chapters= "16" >Mk.</option>
+<option value="42" chapters= "24" >Lk.</option>
+<option value="43" chapters= "21" >Jņ.</option>
+<option value="44" chapters= "28" >Ap. d.</option>
+<option value="45" chapters= "16" >Rom.</option>
+<option value="46" chapters= "16" >1. Kor.</option>
+<option value="47" chapters= "13" >2. Kor.</option>
+<option value="48" chapters= "6" >Gal.</option>
+<option value="49" chapters= "6" >Ef.</option>
+<option value="50" chapters= "4" >Fil.</option>
+<option value="51" chapters= "4" >Kol.</option>
+<option value="52" chapters= "5" >1. Tes.</option>
+<option value="53" chapters= "3" >2. Tes.</option>
+<option value="54" chapters= "6" >1. Tim.</option>
+<option value="55" chapters= "4" >2. Tim.</option>
+<option value="56" chapters= "3" >Tit.</option>
+<option value="57" chapters= "1" >Filem.</option>
+<option value="58" chapters= "13" >Ebr.</option>
+<option value="59" chapters= "5" >Jēk.</option>
+<option value="60" chapters= "5" >1. Pēt.</option>
+<option value="61" chapters= "3" >2. Pēt.</option>
+<option value="62" chapters= "5" >1. Jņ.</option>
+<option value="63" chapters= "1" >2. Jņ.</option>
+<option value="64" chapters= "1" >3. Jņ.</option>
+<option value="65" chapters= "1" >Jūd.</option>
+<option value="66" chapters= "22" >Jņ. atkl.</option>
+<option value="1" chapters= "50" >1. Moz.</option>
+<option value="2" chapters= "40" >2. Moz.</option>
+<option value="3" chapters= "27" >3. Moz.</option>
+<option value="4" chapters= "36" >4. Moz.</option>
+<option value="5" chapters= "34" >5. Moz.</option>
+<option value="6" chapters= "24" >Joz.</option>
+<option value="7" chapters= "21" >Soģu</option>
+<option value="8" chapters= "4" >Rt.</option>
+<option value="9" chapters= "31" >1. Sam.</option>
+<option value="10" chapters= "24" >2. Sam.</option>
+<option value="11" chapters= "22" >1. Ķēn.</option>
+<option value="12" chapters= "25" >2. Ķēn.</option>
+<option value="13" chapters= "29" >1. Lku.</option>
+<option value="14" chapters= "36" >2. Lku.</option>
+<option value="15" chapters= "10" >Ez.</option>
+<option value="16" chapters= "13" >Neh.</option>
+<option value="17" chapters= "10" >Est.</option>
+<option value="18" chapters= "42" >Īj.</option>
+<option value="19" chapters= "150" >Ps.</option>
+<option value="20" chapters= "31" >Sal. pam.</option>
+<option value="21" chapters= "12" >Sal. māc.</option>
+<option value="22" chapters= "8" >Augstā dz.</option>
+<option value="23" chapters= "66" >Jes.</option>
+<option value="24" chapters= "52" >Jer.</option>
+<option value="25" chapters= "5" >Raudu dz.</option>
+<option value="26" chapters= "48" >Ec.</option>
+<option value="27" chapters= "12" >Dan.</option>
+<option value="28" chapters= "14" >Hoz.</option>
+<option value="29" chapters= "3" >Joēla</option>
+<option value="30" chapters= "9" >Ām.</option>
+<option value="31" chapters= "1" >Ob.</option>
+<option value="32" chapters= "4" >Jon.</option>
+<option value="33" chapters= "7" >Mih.</option>
+<option value="34" chapters= "3" >Nah.</option>
+<option value="35" chapters= "3" >Hab.</option>
+<option value="36" chapters= "3" >Cef.</option>
+<option value="37" chapters= "2" >Hag.</option>
+<option value="38" chapters= "14" >Cah.</option>
+<option value="39" chapters= "4" >Mal.</option>		
+</select>	 
+ <input id="editor_comment_c" style="width: 50px;" type="number" value="">:<input id="editor_comment_v" style="width: 50px;" type="number" value="">-<input id="editor_comment_v_to" style="width: 50px;" type="number" value="" onfocus="onfocus_editor_comment_v_to()">		 
+		 
+	</div>
+		 <div style="display: inline-block; float: right;">
+		 <input style="display: inline-block;" onclick="editor_new_coment()" type="submit" value="Jauns">	 
+		 <input style="display: inline-block;" onclick="editor_save_coment()" type="submit" value="Saglabāt">    
+    </div><br><br>
+			 <div id="summernote"></div>
+    <script>
+
+function onfocus_editor_comment_v_to(){
+var v=$('#editor_comment_v').val();
+var v_to=$('#editor_comment_v_to').val();	
+if (v == '') {v = 0;}
+if (v_to == '') {v_to = 0;}
+if (v_to<v) {$('#editor_comment_v_to').val(v);}	
+	
+}
+		
+      $('#summernote').summernote({
+  placeholder: 'Lūdzu raksti šeit',
+  tabsize: 2,
+  toolbar: [
+    ['style', ['style']],
+    ['font', ['bold', 'italic', 'underline', 'clear', 'superscript', 'subscript']],
+    ['fontname', ['fontname']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture', 'video']],
+    ['height', ['height']],
+    ['view', ['undo', 'redo', 'codeview', 'help']]
+  ],
+  fontSizes: ['10', '12', '14', '16', '18'],
+  fontNames: ['Times New Roman'],
+  addDefaultFonts: false,
+  callbacks: {
+    onPaste: function(e) {
+      var clipboardData = e.originalEvent.clipboardData || window.clipboardData;
+      var pastedData = clipboardData.getData('text/html') || clipboardData.getData('text/plain');
+
+      e.preventDefault();
+
+      if (!pastedData) {
+        return; // If no valid pasted data, do nothing
+      }
+
+      // Strip formatting from pasted content
+      var strippedText = stripFormatting(pastedData);
+
+      // Apply custom styles to the stripped content
+      var styledText = applyCustomStyles(strippedText);
+
+      // Insert the styled content at the current cursor position
+      document.execCommand('insertHTML', false, styledText);
+    }
+  }
+});
+
+  $('#summernote').summernote('fontName', 'Linguistics Pro');
+//maceklis///////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+var load_comment_id = 0;
+		
+function stripFormatting(html) {
+  // Remove all inline styles from <p> tags
+  html = html.replace(/<p\s*[^>]*>/gi, '<p>'); // Remove all attributes from <p> tag
+
+  // Remove specific styles like font-size and font-family, except text-decoration and font-style
+  html = html.replace(/(style="[^"]*)font-family:[^;"]*;?/gi, '$1'); // Remove font-family
+  html = html.replace(/(style="[^"]*)font-size:[^;"]*;?/gi, '$1'); // Remove font-size
+
+  // Remove specific classes and attributes like lang
+  html = html.replace(/class="[^"]*"/gi, '');
+  html = html.replace(/lang="[^"]*"/gi, '');
+
+  // Remove any empty tags that might be left after stripping
+  html = html.replace(/<[^\/>][^>]*><\/[^>]+>/g, '');
+
+  return html.trim(); // Trim any leading or trailing whitespace
+}
+
+function applyCustomStyles(html) {
+  // Wrap the stripped text in a span with Times New Roman font family and 18pt font size
+  return '<span style="font-family: \'Times New Roman\', Times, serif; font-size: 18pt;">' + html + '</span>';
+}
+
+
+
+
+
+
+function editor_save_coment(){
+var id = $("#editor_comment_id").val();
+if (id==''){id=0;}
+var title = $("#editor_comment_title").val();
+
+var b = $("#editor_comment_b").val();
+var c = $("#editor_comment_c").val();
+var v = $("#editor_comment_v").val();
+var v_to = $("#editor_comment_v_to").val();	
+	
+var html = $("#summernote").summernote('code');
+//var strippedHtml = stripFormatting(html);
+var irok = false;
+if (title.length<3 && html.length<3){
+alert('Forma nav aizpildīta!');
+}
+else
+if (html.length<3){
+alert('Nevar saglabāt tukšu komentāru!');
+}
+else
+if (title.length<3){
+alert('Lūdzu ieraksti virsrakstu!');
+}
+	
+else{
+	
+var arr = {id:id, title:title,html:html,b:b,c:c,v:v,v_to:v_to};
+
+$.post( "save_bible_comment.php", JSON.stringify(arr), function( data ) {
+  
+  rez = JSON.parse(data);
+  if (rez.rez==-1000){alert('Sesijas laiks beidzies!');}
+	else 
+	if (rez.rez<0){alert('Kļūda, neizdevās saglabāt! '+rez.error);}
+	else
+  if (rez.rez==1){alert('Komentārs pievienots!');
+	if (rez.id>0){ $("#editor_comment_id").val(rez.id);}			 
+	}
+	else
+  if (rez.rez==2){alert('Izmaiņas saglabātas!');}
+	else		
+	{alert('Nezināma kļūda! '+rez.error);}	
+			
+	console.log('============================================');
+  console.log(data);
+  console.log('============================================');
+
+
+});
+}	
+}
+		
+function editor_new_coment(){
+//setIsSaved();
+//	alert(getIsSaved());	
+if (/*getIsSaved() ||*/ confirm("Vai aizvērt nesaglabājot?")){
+	$("#editor_comment_id").val('');
+	$("#editor_comment_title").val('');	
+	$('#summernote').summernote('code', '');
+	$("#editor_comment_title").focus();
+	setIsSaved();
+}
+}	
+		
+var saved_comment_title = '';
+var saved_comment_html = '';
+		
+function setIsSaved(){
+saved_comment_title = $("#editor_comment_title").val('');	
+saved_comment_html = $('#summernote').summernote('code');
+}
+
+function getIsSaved(){	
+//alert(';'+saved_comment_html +'=='+ $('#summernote').summernote('code'))+';';	
+return saved_comment_title == $("#editor_comment_title").val('') &&	saved_comment_html == $('#summernote').summernote('code');
+}
+		
+		
+function load_bible_comment(id){
+	
+var url = '/editor/editor_load_bible_comment.php?id='+id;		
+	
+  $.ajax({url: url, success: function(result){ 
+	 o = JSON.parse(result); 
+	  //{"rez":1,"comemnts":[{"id":"1","title":"title","html":"
+	if (o.rez == 1){
+		var id = o.comemnts[0].id;
+		var title = o.comemnts[0].title;
+		var html = o.comemnts[0].html;
+		
+		var b = o.comemnts[0].b;
+		var c = o.comemnts[0].c;
+		var v = o.comemnts[0].v;
+		var v_to = o.comemnts[0].v_to;	
+		
+		setIsSaved();
+	 $("#editor_comment_id").val(id);
+	 $("#editor_comment_title").val(title);	
+	
+	 $("#editor_comment_b").val(b);	
+	 $("#editor_comment_c").val(c);	
+	 $("#editor_comment_v").val(v);	
+	 $("#editor_comment_v_to").val(v_to);		
+		
+	 $('#summernote').summernote('code', html);
+	}	  
+	  /*
+		while (i <= o.vlen) {
+    	  var v = o.varr[i].v;
+		  var t = o.varr[i].t;	
+			var v3 = ''+v;
+			if (v3.length==1) {v3 = '00'+v3;} else if (v3.length==2) {v3 = '0'+v3;}
+			var id8=id5+v3;	
+	 		i++;
+		}*/
+	  
+	 
+  }});
+
+};		
+
+load_bible_comment(load_comment_id);		
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+    </script>
+  </body>
+</html>

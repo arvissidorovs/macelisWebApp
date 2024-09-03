@@ -1,0 +1,175 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Vārdnīca labot</title>
+    <script src="summernote-0.8.18-dist/jquery-3.4.1.slim.min.js"></script>
+    <link href="summernote-0.8.18-dist/summernote-lite.min.css" rel="stylesheet">
+	  
+	<style>  
+	 .note-editable { height: calc(100vh - 180px);  width: calc(90vw - 150px);} 
+	</style>  
+    <script src="summernote-0.8.18-dist/summernote-lite.min.js"></script>
+  </head>
+  <body>
+	
+	  <div style="display: inline-block;"> 
+	<label for="fname">#</label>	  
+  	<input style="display: inline-block; width:50px;" type="text" id="editor_post_id"  readonly> 
+	</div> 
+	 <div style="display: inline-block;"> 
+	 <label for="fname">Virsraksts</label>
+  	<input style="display: inline-block; width:150px;" type="text" id="editor_post_title"> 
+	</div>
+	<div style="display: inline-block;"> 
+	 <label for="fname">Kategorija</label>
+  	<input style="display: inline-block; width:100px;" type="text" id="editor_post_category"> 
+	</div>
+	<div style="display: inline-block;"> 
+	 <label for="fname">Kārtot</label>
+  	<input style="display: inline-block; width:100px;" type="text" id="editor_post_sort"> 
+	</div>
+	<div style="display: inline-block;"> 
+	 <label for="fname">Redzams</label>
+  	<input style="display: inline-block; width:100px;" type="text" id="editor_post_visible"> 
+	</div>  
+		 <div style="display: inline-block; float: right;">
+		 <input style="display: inline-block;" onclick="editor_new_post()" type="submit" value="Jauns">	 
+		 <input style="display: inline-block;" onclick="editor_save_post()" type="submit" value="Saglabāt">    
+    </div><br><br>
+			 <div id="summernote"></div>
+    <script>
+      $('#summernote').summernote({
+        placeholder: 'Lūdzu raksti šeit',
+        tabsize: 2,
+        tabDisable: true,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold','italic','underline', 'clear', 'superscript', 'subscript']],
+		  ['fontname', ['fontname']],
+          ['fontsize', ['fontsize']],
+		  ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+    	  ['height', ['height']],
+		  ['view', ['undo', 'redo', 'codeview', 'help']]			
+        ],
+		 fontSizes: ['10', '12', '14', '16', '18'],
+		 fontNames: ['Times New Roman'],
+  		 addDefaultFonts: false
+      });
+	  $('#summernote').summernote('fontName', 'Linguistics Pro');
+//maceklis///////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+var load_post_id = 0;
+function editor_save_post(){
+var id = $("#editor_post_id").val();
+if (id==''){id=0;}
+var word = $("#editor_post_word").val();	
+var variations = $("#editor_post_variations").val();	
+var html = $("#summernote").summernote('code');	
+var irok = false;
+if (word.length<3 && html.length<3 && variations.length<3){
+alert('Forma nav aizpildīta!');
+}
+else
+if (html.length<3){
+alert('Nevar saglabāt tukšu komentāru!');
+}
+else
+if (word.length<3){
+alert('Lūdzu ieraksti virsrakstu!');
+}
+else
+if (variations.length<3){
+alert('Lūdzu ieraksti variācijas!');
+}
+	
+else{
+	
+var arr = {id:id, word:word, variations:variations, html:html};
+
+$.post( "save_post.php", JSON.stringify(arr), function( data ) {
+  
+  rez = JSON.parse(data);
+  if (rez.rez==-1000){alert('Sesijas laiks beidzies!');}
+	else 
+	if (rez.rez<0){alert('Kļūda, neizdevās saglabāt! '+rez.error);}
+	else
+  if (rez.rez==1){alert('Komentārs pievienots!');
+	if (rez.id>0){ $("#editor_post_id").val(rez.id);}			 
+	}
+	else
+  if (rez.rez==2){alert('Izmaiņas saglabātas!');}
+	else		
+	{alert('Nezināma kļūda! '+rez.error);}	
+			
+	console.log('============================================');
+  console.log(data);
+  console.log('============================================');
+
+
+});
+}	
+}
+		
+function editor_new_post(){
+//setIsSaved();
+//	alert(getIsSaved());	
+if (/*getIsSaved() ||*/ confirm("Vai aizvērt nesaglabājot?")){
+	$("#editor_post_id").val('');
+	$("#editor_post_word").val('');	
+	$("#editor_post_variations").val('');	
+	$('#summernote').summernote('code', '');
+	$("#editor_post_word").focus();
+	setIsSaved();
+}
+}	
+		
+var saved_post_word = '';
+var saved_post_variations = '';		
+var saved_post_html = '';
+		
+function setIsSaved(){
+saved_post_word = $("#editor_post_word").val();	
+saved_post_variations = $("#editor_post_variations").val();	
+saved_post_html = $('#summernote').summernote('code');
+}
+
+function getIsSaved(){		
+return saved_post_word == $("#editor_post_word").val() && saved_post_variations == $("#editor_post_variations").val() &&	saved_post_html == $('#summernote').summernote('code');
+}
+		
+		
+function load_post(id){
+	
+var url = '/editor/editor_load_post.php?id='+id;		
+	
+  $.ajax({url: url, success: function(result){ 
+	 o = JSON.parse(result); 
+	 //{"rez":1,"posts":[{"id":"1","title":"test","html":"test","category":"test","sort":"0","visible":"0"}]}
+	if (o.rez == 1){
+		var id = o.posts[0].id;
+		var title = o.posts[0].title;
+		var html = o.posts[0].html;
+		var category = o.posts[0].category;
+		var sort = o.posts[0].sort;
+		var visible = o.posts[0].visible;
+		setIsSaved();
+	 $("#editor_post_id").val(id);
+	 $("#editor_post_title").val(title);	
+	 $("#editor_post_category").val(category);
+	 $("#editor_post_visible").val(visible);
+	 $('#summernote').summernote('code', html);
+	}	  
+	  
+	 
+  }});
+
+};		
+
+load_post(load_post_id);		
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+    </script>
+  </body>
+</html>
