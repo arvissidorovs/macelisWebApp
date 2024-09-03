@@ -1,164 +1,196 @@
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Vārdnīca labot</title>
     <script src="summernote-0.8.18-dist/jquery-3.4.1.slim.min.js"></script>
-    <link href="summernote-0.8.18-dist/summernote-lite.min.css" rel="stylesheet">
-	  
-	<style>  
-	 .note-editable { height: calc(100vh - 180px);  width: calc(90vw - 150px);} 
-	</style>  
+    <link
+      href="summernote-0.8.18-dist/summernote-lite.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .note-editable {
+        height: calc(100vh - 180px);
+        width: calc(90vw - 150px);
+      }
+    </style>
     <script src="summernote-0.8.18-dist/summernote-lite.min.js"></script>
   </head>
   <body>
-	
-	  <div style="display: inline-block;"> 
-	<label for="fname">#</label>	  
-  	<input style="display: inline-block; width:50px;" type="text" id="editor_dictionary_id"  readonly> 
-	</div> 
-	 <div style="display: inline-block;"> 
-	 <label for="fname">Vārds</label>
-  	<input style="display: inline-block; width:150px;" type="text" id="editor_dictionary_word"> 
-	</div>
-	<div style="display: inline-block;"> 
-	 <label for="fname">Variācijas</label>
-  	<input style="display: inline-block; width:500px;" type="text" id="editor_dictionary_variations"> 
-	</div> 
-		 <div style="display: inline-block; float: right;">
-		 <input style="display: inline-block;" onclick="editor_new_dictionary()" type="submit" value="Jauns">	 
-		 <input style="display: inline-block;" onclick="editor_save_dictionary()" type="submit" value="Saglabāt">    
-    </div><br><br>
-			 <div id="summernote"></div>
+    <div style="display: inline-block">
+      <label for="fname">#</label>
+      <input
+        style="display: inline-block; width: 50px"
+        type="text"
+        id="editor_dictionary_id"
+        readonly
+      />
+    </div>
+    <div style="display: inline-block">
+      <label for="fname">Vārds</label>
+      <input
+        style="display: inline-block; width: 150px"
+        type="text"
+        id="editor_dictionary_word"
+      />
+    </div>
+    <div style="display: inline-block">
+      <label for="fname">Variācijas</label>
+      <input
+        style="display: inline-block; width: 500px"
+        type="text"
+        id="editor_dictionary_variations"
+      />
+    </div>
+    <div style="display: inline-block; float: right">
+      <input
+        style="display: inline-block"
+        onclick="editor_new_dictionary()"
+        type="submit"
+        value="Jauns"
+      />
+      <input
+        style="display: inline-block"
+        onclick="editor_save_dictionary()"
+        type="submit"
+        value="Saglabāt"
+      />
+    </div>
+    <br /><br />
+    <div id="summernote"></div>
     <script>
-      $('#summernote').summernote({
-        placeholder: 'Lūdzu raksti šeit',
+      $("#summernote").summernote({
+        placeholder: "Lūdzu raksti šeit",
         tabsize: 2,
         tabDisable: true,
         toolbar: [
-          ['style', ['style']],
-          ['font', ['bold','italic','underline', 'clear', 'superscript', 'subscript']],
-		  ['fontname', ['fontname']],
-          ['fontsize', ['fontsize']],
-		  ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-    	  ['height', ['height']],
-		  ['view', ['undo', 'redo', 'codeview', 'help']]			
+          ["style", ["style"]],
+          [
+            "font",
+            [
+              "bold",
+              "italic",
+              "underline",
+              "clear",
+              "superscript",
+              "subscript",
+            ],
+          ],
+          ["fontname", ["fontname"]],
+          ["fontsize", ["fontsize"]],
+          ["color", ["color"]],
+          ["para", ["ul", "ol", "paragraph"]],
+          ["table", ["table"]],
+          ["insert", ["link", "picture", "video"]],
+          ["height", ["height"]],
+          ["view", ["undo", "redo", "codeview", "help"]],
         ],
-		 fontSizes: ['10', '12', '14', '16', '18'],
-		 fontNames: ['Times New Roman'],
-  		 addDefaultFonts: false
+        fontSizes: ["10", "12", "14", "16", "18"],
+        fontNames: ["Times New Roman"],
+        addDefaultFonts: false,
       });
-	  $('#summernote').summernote('fontName', 'Linguistics Pro');
-//maceklis///////////////////////////////////////////////////////////////////////////////////////////////////////////////		
-var load_dictionary_id = 0;
-function editor_save_dictionary(){
-var id = $("#editor_dictionary_id").val();
-if (id==''){id=0;}
-var word = $("#editor_dictionary_word").val();	
-var variations = $("#editor_dictionary_variations").val();	
-var html = $("#summernote").summernote('code');	
-var irok = false;
-if (word.length<3 && html.length<3 && variations.length<3){
-alert('Forma nav aizpildīta!');
-}
-else
-if (html.length<3){
-alert('Nevar saglabāt tukšu komentāru!');
-}
-else
-if (word.length<3){
-alert('Lūdzu ieraksti virsrakstu!');
-}
-else
-if (variations.length<3){
-alert('Lūdzu ieraksti variācijas!');
-}
-	
-else{
-	
-var arr = {id:id, word:word, variations:variations, html:html};
+      $("#summernote").summernote("fontName", "Linguistics Pro");
 
-$.post( "save_dictionary.php", JSON.stringify(arr), function( data ) {
-  
-  rez = JSON.parse(data);
-  if (rez.rez==-1000){alert('Sesijas laiks beidzies!');}
-	else 
-	if (rez.rez<0){alert('Kļūda, neizdevās saglabāt! '+rez.error);}
-	else
-  if (rez.rez==1){alert('Komentārs pievienots!');
-	if (rez.id>0){ $("#editor_dictionary_id").val(rez.id);}			 
-	}
-	else
-  if (rez.rez==2){alert('Izmaiņas saglabātas!');}
-	else		
-	{alert('Nezināma kļūda! '+rez.error);}	
-			
-	console.log('============================================');
-  console.log(data);
-  console.log('============================================');
+      var load_dictionary_id = 0;
+      function editor_save_dictionary() {
+        var id = $("#editor_dictionary_id").val();
+        if (id == "") {
+          id = 0;
+        }
+        var word = $("#editor_dictionary_word").val();
+        var variations = $("#editor_dictionary_variations").val();
+        var html = $("#summernote").summernote("code");
+        var irok = false;
+        if (word.length < 3 && html.length < 3 && variations.length < 3) {
+          alert("Forma nav aizpildīta!");
+        } else if (html.length < 3) {
+          alert("Nevar saglabāt tukšu komentāru!");
+        } else if (word.length < 3) {
+          alert("Lūdzu ieraksti virsrakstu!");
+        } else if (variations.length < 3) {
+          alert("Lūdzu ieraksti variācijas!");
+        } else {
+          var arr = { id: id, word: word, variations: variations, html: html };
 
+          $.post("save_dictionary.php", JSON.stringify(arr), function (data) {
+            rez = JSON.parse(data);
+            if (rez.rez == -1000) {
+              alert("Sesijas laiks beidzies!");
+            } else if (rez.rez < 0) {
+              alert("Kļūda, neizdevās saglabāt! " + rez.error);
+            } else if (rez.rez == 1) {
+              alert("Komentārs pievienots!");
+              if (rez.id > 0) {
+                $("#editor_dictionary_id").val(rez.id);
+              }
+            } else if (rez.rez == 2) {
+              alert("Izmaiņas saglabātas!");
+            } else {
+              alert("Nezināma kļūda! " + rez.error);
+            }
 
-});
-}	
-}
-		
-function editor_new_dictionary(){
-//setIsSaved();
-//	alert(getIsSaved());	
-if (/*getIsSaved() ||*/ confirm("Vai aizvērt nesaglabājot?")){
-	$("#editor_dictionary_id").val('');
-	$("#editor_dictionary_word").val('');	
-	$("#editor_dictionary_variations").val('');	
-	$('#summernote').summernote('code', '');
-	$("#editor_dictionary_word").focus();
-	setIsSaved();
-}
-}	
-		
-var saved_dictionary_word = '';
-var saved_dictionary_variations = '';		
-var saved_dictionary_html = '';
-		
-function setIsSaved(){
-saved_dictionary_word = $("#editor_dictionary_word").val();	
-saved_dictionary_variations = $("#editor_dictionary_variations").val();	
-saved_dictionary_html = $('#summernote').summernote('code');
-}
+            console.log("============================================");
+            console.log(data);
+            console.log("============================================");
+          });
+        }
+      }
 
-function getIsSaved(){		
-return saved_dictionary_word == $("#editor_dictionary_word").val() && saved_dictionary_variations == $("#editor_dictionary_variations").val() &&	saved_dictionary_html == $('#summernote').summernote('code');
-}
-		
-		
-function load_dictionary(id){
-	
-var url = '/editor/editor_load_dictionary.php?id='+id;		
-	
-  $.ajax({url: url, success: function(result){ 
-	 o = JSON.parse(result); 
-	  //{"rez":1,"comemnts":[{"id":"1","word":"word","html":"
-	if (o.rez == 1){
-		var id = o.comemnts[0].id;
-		var word = o.comemnts[0].word;
-		var variations = o.comemnts[0].variations;
-		var html = o.comemnts[0].html;
-		setIsSaved();
-	 $("#editor_dictionary_id").val(id);
-	 $("#editor_dictionary_word").val(word);	
-	 $("#editor_dictionary_variations").val(variations);		
-	 $('#summernote').summernote('code', html);
-	}	  
-	  
-	 
-  }});
+      function editor_new_dictionary() {
+        //setIsSaved();
+        //	alert(getIsSaved());
+        if (/*getIsSaved() ||*/ confirm("Vai aizvērt nesaglabājot?")) {
+          $("#editor_dictionary_id").val("");
+          $("#editor_dictionary_word").val("");
+          $("#editor_dictionary_variations").val("");
+          $("#summernote").summernote("code", "");
+          $("#editor_dictionary_word").focus();
+          setIsSaved();
+        }
+      }
 
-};		
+      var saved_dictionary_word = "";
+      var saved_dictionary_variations = "";
+      var saved_dictionary_html = "";
 
-load_dictionary(load_dictionary_id);		
-		
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+      function setIsSaved() {
+        saved_dictionary_word = $("#editor_dictionary_word").val();
+        saved_dictionary_variations = $("#editor_dictionary_variations").val();
+        saved_dictionary_html = $("#summernote").summernote("code");
+      }
+
+      function getIsSaved() {
+        return (
+          saved_dictionary_word == $("#editor_dictionary_word").val() &&
+          saved_dictionary_variations ==
+            $("#editor_dictionary_variations").val() &&
+          saved_dictionary_html == $("#summernote").summernote("code")
+        );
+      }
+
+      function load_dictionary(id) {
+        var url = "/editor/editor_load_dictionary.php?id=" + id;
+
+        $.ajax({
+          url: url,
+          success: function (result) {
+            o = JSON.parse(result);
+            if (o.rez == 1) {
+              var id = o.comemnts[0].id;
+              var word = o.comemnts[0].word;
+              var variations = o.comemnts[0].variations;
+              var html = o.comemnts[0].html;
+              setIsSaved();
+              $("#editor_dictionary_id").val(id);
+              $("#editor_dictionary_word").val(word);
+              $("#editor_dictionary_variations").val(variations);
+              $("#summernote").summernote("code", html);
+            }
+          },
+        });
+      }
+
+      load_dictionary(load_dictionary_id);
     </script>
   </body>
 </html>

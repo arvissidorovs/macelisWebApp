@@ -190,7 +190,7 @@ session_start();
                                         </li>
                                         <li><a class="dropdown-item" href="log-in/logout.php">Izrakstīties</a></li>
                                         <?php else: ?>
-                                        <li><a class="dropdown-item" href="log-in/login.html">Pierakstīties</a></li>
+                                        <li><a class="dropdown-item" href="log-in/login.php">Pierakstīties</a></li>
                                         <?php endif; ?>
                                     </ul>
                                 </li>
