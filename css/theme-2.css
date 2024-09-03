@@ -31,6 +31,7 @@
 	--background-color: #e9e6e0;
 	--canvas-background: #fff;
 	--text-color: #000;
+	--dropdown-text-color: #000;
 	--top-button-color: #5c4f31;
 	--border-color: #dee2e6;
 	--accordion-bg: #fff;
@@ -58,6 +59,7 @@
 	--background-color: #1c1c1c;
 	--canvas-background: #363636;
 	--text-color: #fff;
+	--dropdown-text-color: #000;
 	--top-button-color: #b6a478;
 	--border-color: #888888;
 	--accordion-bg: #363636;
@@ -128,6 +130,14 @@
 .verse-by-verse small span {
 	color: var(--text-color) !important;	
 }
+
+.dropdown-text-color {
+	color: var(--dropdown-text-color) !important;	
+}
+
+.text-color {
+	color: var(--text-color) !important;	
+}
 		
 .bg--white span {
 	color: var(--text-color);	
@@ -154,6 +164,10 @@
 }
 
 .bg--white h5 {
+	color: var(--text-color);	
+}
+
+div {
 	color: var(--text-color);	
 }
 		
@@ -1025,11 +1039,11 @@ small.left:after {
 	color: #FFFBF3;	
 }
 
-@media (max-width: 900px){
+/*@media (max-width: 900px){
 	.hide-element {
-		//font-size: 0px !important;
+		font-size: 0px !important;
 	}
-}
+}*/
 
 @media (max-width: 530px) {
     .neradit-mob {
@@ -1076,18 +1090,18 @@ small.left:after {
 }
 
 
-@media only screen and (max-width: 290px) {
- //.mt-3 {background-color: lightblue;}	
+/*@media only screen and (max-width: 290px) {
+ .mt-3 {background-color: lightblue;}	
  .neradit-mob {
 	display: none;
 	}		
 }
 @media only screen and (max-width: 900px) {
- //.mt-3 {background-color: lightblue;}	
+ .mt-3 {background-color: lightblue;}	
  .neradit-label {
 	display: none;
 	}
-}
+}*/
 
 
 
@@ -1206,10 +1220,6 @@ select {
 
 a{
 	text-decoration: none;
-}
-
-a:hover{
-	
 }
 
 .banner a {
@@ -1419,7 +1429,7 @@ font-size: smaller;
 /*! Custom navbar */
 .navbar-toggler{
 	width: 20px;
-	height: 20px:
+	height: 20px;
 	position: relative;
 	transition: .5s ease-in-out;
 }
