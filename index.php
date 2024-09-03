@@ -149,8 +149,8 @@ session_start();
         <div class="content">
             <!-- Top Navigation -->
             <!--<a class="btn btn-primary btn-customized open-menu" id="sidebarbtn" role="button">
-            		<i class="fas fa-arrow-left"></i>
-        		</a>-->
+					<i class="fas fa-arrow-left"></i>
+				</a>-->
 
             <div class="row side-margin side-margin-mobile no-gutters d-flex align-items-end mt-3">
                 <!-- Left-aligned elements -->
@@ -285,7 +285,7 @@ session_start();
                                     </li>
                                     <li><a class="dropdown-item" href="log-in/logout.php">Izrakstīties</a></li>
                                     <?php else: ?>
-                                    <li><a class="dropdown-item" href="log-in/login.html">Pierakstīties</a></li>
+                                    <li><a class="dropdown-item" href="log-in/login.php">Pierakstīties</a></li>
                                     <?php endif; ?>
                                 </ul>
 
@@ -583,7 +583,7 @@ session_start();
                                 </div>
                                 <div class="modal-footer">
                                     <button class="login-modal-btn"
-                                        onclick="location.href='log-in/login.html'">Pierakstīties</button>
+                                        onclick="location.href='log-in/login.php'">Pierakstīties</button>
                                 </div>
                             </div>
                         </div>
