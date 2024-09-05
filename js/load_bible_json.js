@@ -158,6 +158,9 @@ function load_c_json(tr, b, c) {
         }
         updateMetaTag("description", description);
         updateMetaTag("og:description", description);
+
+        var canonicalUrl = newurl.split("?")[0];
+        updateMetaTag("canonical", canonicalUrl);
       }
 
       if (o.b > 0) {
@@ -638,14 +641,20 @@ function getUrlParameter(name) {
 function updateMetaTag(name, content) {
   var metaTag =
     document.querySelector('meta[name="' + name + '"]') ||
-    document.querySelector('meta[property="' + name + '"]');
+    document.querySelector('meta[property="' + name + '"]') ||
+    document.querySelector('link[rel="canonical"]');
   if (metaTag) {
-    metaTag.setAttribute("content", content);
+    metaTag.setAttribute(name === "canonical" ? "href" : "content", content);
   } else {
-    metaTag = document.createElement("meta");
-    metaTag.setAttribute("name", name);
-    metaTag.setAttribute("content", content);
-    document.getElementsByTagName("head")[0].appendChild(metaTag);
+    var newMetaTag = document.createElement(
+      name === "canonical" ? "link" : "meta"
+    );
+    newMetaTag.setAttribute(
+      name === "canonical" ? "rel" : "name",
+      name === "canonical" ? "canonical" : name
+    );
+    newMetaTag.setAttribute(name === "canonical" ? "href" : "content", content);
+    document.head.appendChild(newMetaTag);
   }
 }
 

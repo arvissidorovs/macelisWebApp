@@ -34,14 +34,14 @@ session_start();
     <link rel="manifest" href="/manifest.json">
 
     <style type="text/css">
-    .a_option_hidden {
-        display: none;
-    }
+        .a_option_hidden {
+            display: none;
+        }
     </style>
     <script>
-    function isLoggedIn() {
-        return <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
-    }
+        function isLoggedIn() {
+            return <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+        }
     </script>
 
 
@@ -149,8 +149,8 @@ session_start();
         <div class="content">
             <!-- Top Navigation -->
             <!--<a class="btn btn-primary btn-customized open-menu" id="sidebarbtn" role="button">
-					<i class="fas fa-arrow-left"></i>
-				</a>-->
+                    <i class="fas fa-arrow-left"></i>
+                </a>-->
 
             <div class="row side-margin side-margin-mobile no-gutters d-flex align-items-end mt-3">
                 <!-- Left-aligned elements -->
@@ -185,12 +185,12 @@ session_start();
                                     </a>
                                     <ul class="dropdown-menu">
                                         <?php if (isset($_SESSION['username']) && isset($_SESSION['user_id'])): ?>
-                                        <li class="dropdown-item">
-                                            <?php echo htmlspecialchars($_SESSION['username']); ?>
-                                        </li>
-                                        <li><a class="dropdown-item" href="log-in/logout.php">Izrakstīties</a></li>
+                                            <li class="dropdown-item">
+                                                <?php echo htmlspecialchars($_SESSION['username']); ?>
+                                            </li>
+                                            <li><a class="dropdown-item" href="log-in/logout.php">Izrakstīties</a></li>
                                         <?php else: ?>
-                                        <li><a class="dropdown-item" href="log-in/login.php">Pierakstīties</a></li>
+                                            <li><a class="dropdown-item" href="log-in/login.php">Pierakstīties</a></li>
                                         <?php endif; ?>
                                     </ul>
                                 </li>
@@ -280,12 +280,12 @@ session_start();
                                 </a>
                                 <ul class="dropdown-menu" id="userMenu">
                                     <?php if (isset($_SESSION['username']) && isset($_SESSION['user_id'])): ?>
-                                    <li class="dropdown-item">
-                                        <?php echo htmlspecialchars($_SESSION['username']); ?>
-                                    </li>
-                                    <li><a class="dropdown-item" href="log-in/logout.php">Izrakstīties</a></li>
+                                        <li class="dropdown-item">
+                                            <?php echo htmlspecialchars($_SESSION['username']); ?>
+                                        </li>
+                                        <li><a class="dropdown-item" href="log-in/logout.php">Izrakstīties</a></li>
                                     <?php else: ?>
-                                    <li><a class="dropdown-item" href="log-in/login.php">Pierakstīties</a></li>
+                                        <li><a class="dropdown-item" href="log-in/login.php">Pierakstīties</a></li>
                                     <?php endif; ?>
                                 </ul>
 
@@ -625,182 +625,182 @@ session_start();
     <script src="editor/summernote-0.8.18-dist/summernote-lite.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-            height: 300,
-            minHeight: null,
-            maxHeight: null,
-            focus: true,
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const submenus = document.querySelectorAll('.dropdown-submenu > a');
-
-        submenus.forEach(submenu => {
-            submenu.addEventListener('click', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                const submenuContent = submenu.nextElementSibling;
-                if (submenuContent && submenuContent.classList.contains('submenu')) {
-                    submenuContent.classList.toggle('show');
-                }
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 300,
+                minHeight: null,
+                maxHeight: null,
+                focus: true,
             });
         });
-    });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            const submenus = document.querySelectorAll('.dropdown-submenu > a');
 
-    /* Set theme of the page */
-    function setTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    }
+            submenus.forEach(submenu => {
+                submenu.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
 
-    // Event listeners for theme selection
-    document.getElementById('lightTheme').addEventListener('click', function() {
-        setTheme('light');
-    });
-
-    document.getElementById('darkTheme').addEventListener('click', function() {
-        setTheme('dark');
-    });
-
-    document.getElementById('lightThemeSmall').addEventListener('click', function() {
-        setTheme('light');
-    });
-
-    document.getElementById('darkThemeSmall').addEventListener('click', function() {
-        setTheme('dark');
-    });
-
-    // Apply the saved theme on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else {
-            setTheme('light'); // default to light if no theme is saved
-        }
-    });
-
-    //
-    document.addEventListener('DOMContentLoaded', function() {
-        var submenus = document.querySelectorAll('.dropdown-submenu');
-
-        submenus.forEach(function(submenu) {
-            submenu.addEventListener('mouseenter', function(event) {
-                event.stopPropagation();
-                submenu.querySelector('.submenu').classList.add('show');
-            });
-
-            submenu.addEventListener('mouseleave', function(event) {
-                event.stopPropagation();
-                submenu.querySelector('.submenu').classList.remove('show');
+                    const submenuContent = submenu.nextElementSibling;
+                    if (submenuContent && submenuContent.classList.contains('submenu')) {
+                        submenuContent.classList.toggle('show');
+                    }
+                });
             });
         });
-    });
 
 
-    function changeDropdownText(selectedElement) {
-        document.getElementById('dropdownMenuButton').textContent = selectedElement;
-    }
-
-    function scroll_to(clicked_link, nav_height) {
-        var element_class = clicked_link.attr('href').replace('#', '.');
-        var scroll_to = 0;
-        if (element_class != '.top-content') {
-            element_class += '-container';
-            scroll_to = $(element_class).offset().top - nav_height;
+        /* Set theme of the page */
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
         }
-        if ($(window).scrollTop() != scroll_to) {
-            $('html, body').stop().animate({
-                scrollTop: scroll_to
-            }, 1000);
-        }
-    }
 
-    jQuery(document).ready(function() {
-        /*Sidebar*/
-
-        $('.hover-underline-animation').on('click', function() {
-            $('.hover-underline-animation').not(this).removeClass(
-                '.hover-underline-animation-underline');
-            $(this).toggleClass('.hover-underline-animation-underline');
+        // Event listeners for theme selection
+        document.getElementById('lightTheme').addEventListener('click', function () {
+            setTheme('light');
         });
 
-        $(document).on("click", "#offcanvasBottomLabel", function() {
-            $('.offcanvas').offcanvas('hide');
+        document.getElementById('darkTheme').addEventListener('click', function () {
+            setTheme('dark');
         });
 
-        $(document).on("click", "#comment_offcanvasBottomLabel", function() {
-            $('.offcanvas').offcanvas('hide');
+        document.getElementById('lightThemeSmall').addEventListener('click', function () {
+            setTheme('light');
         });
 
-        $('.scroll-link').on('click', function() {
-            $('.sidebar').removeClass('active');
+        document.getElementById('darkThemeSmall').addEventListener('click', function () {
+            setTheme('dark');
         });
 
-        $(document).on("click", "#bookSelect", function() {
-            $(this).toggleClass("hr-lines-after");
-        });
-
-        $(document).on("click", "#topbookBtn", function() {
-            $('.offcanvas').offcanvas('hide');
-        });
-
-        $('.btn').on('click', function() {
-            $('.sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
-        });
-
-        $('.passage').on('click', function() {
-            $('.sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
-        });
-
-        $('.dismiss, .overlay').on('click', function() {
-            $('.sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
-        });
-
-        $('.open-menu').on('click', function(e) {
-            e.preventDefault();
-            $('.sidebar').addClass('active');
-            $('.overlay').addClass('active');
-            $('.offcanvas').offcanvas('hide');
-            // close opened sub-menus
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-
-        /* change sidebar style */
-        $('a.btn-customized-dark').on('click', function(e) {
-            e.preventDefault();
-            $('.sidebar').removeClass('light');
-        });
-
-        $('a.btn-customized-light').on('click', function(e) {
-            e.preventDefault();
-            $('.sidebar').addClass('light');
-        });
-
-        /*Navigation*/
-        $('a.scroll-link').on('click', function(e) {
-            e.preventDefault();
-            scroll_to($(this), 0);
-        });
-
-        $('.to-top a').on('click', function(e) {
-            e.preventDefault();
-            if ($(window).scrollTop() != 0) {
-                $('html, body').stop().animate({
-                    scrollTop: 0
-                }, 1000);
+        // Apply the saved theme on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                setTheme('light'); // default to light if no theme is saved
             }
         });
 
-        new WOW().init();
-    });
+        //
+        document.addEventListener('DOMContentLoaded', function () {
+            var submenus = document.querySelectorAll('.dropdown-submenu');
+
+            submenus.forEach(function (submenu) {
+                submenu.addEventListener('mouseenter', function (event) {
+                    event.stopPropagation();
+                    submenu.querySelector('.submenu').classList.add('show');
+                });
+
+                submenu.addEventListener('mouseleave', function (event) {
+                    event.stopPropagation();
+                    submenu.querySelector('.submenu').classList.remove('show');
+                });
+            });
+        });
+
+
+        function changeDropdownText(selectedElement) {
+            document.getElementById('dropdownMenuButton').textContent = selectedElement;
+        }
+
+        function scroll_to(clicked_link, nav_height) {
+            var element_class = clicked_link.attr('href').replace('#', '.');
+            var scroll_to = 0;
+            if (element_class != '.top-content') {
+                element_class += '-container';
+                scroll_to = $(element_class).offset().top - nav_height;
+            }
+            if ($(window).scrollTop() != scroll_to) {
+                $('html, body').stop().animate({
+                    scrollTop: scroll_to
+                }, 1000);
+            }
+        }
+
+        jQuery(document).ready(function () {
+            /*Sidebar*/
+
+            $('.hover-underline-animation').on('click', function () {
+                $('.hover-underline-animation').not(this).removeClass(
+                    '.hover-underline-animation-underline');
+                $(this).toggleClass('.hover-underline-animation-underline');
+            });
+
+            $(document).on("click", "#offcanvasBottomLabel", function () {
+                $('.offcanvas').offcanvas('hide');
+            });
+
+            $(document).on("click", "#comment_offcanvasBottomLabel", function () {
+                $('.offcanvas').offcanvas('hide');
+            });
+
+            $('.scroll-link').on('click', function () {
+                $('.sidebar').removeClass('active');
+            });
+
+            $(document).on("click", "#bookSelect", function () {
+                $(this).toggleClass("hr-lines-after");
+            });
+
+            $(document).on("click", "#topbookBtn", function () {
+                $('.offcanvas').offcanvas('hide');
+            });
+
+            $('.btn').on('click', function () {
+                $('.sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+            $('.passage').on('click', function () {
+                $('.sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+            $('.dismiss, .overlay').on('click', function () {
+                $('.sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+            $('.open-menu').on('click', function (e) {
+                e.preventDefault();
+                $('.sidebar').addClass('active');
+                $('.overlay').addClass('active');
+                $('.offcanvas').offcanvas('hide');
+                // close opened sub-menus
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+
+            /* change sidebar style */
+            $('a.btn-customized-dark').on('click', function (e) {
+                e.preventDefault();
+                $('.sidebar').removeClass('light');
+            });
+
+            $('a.btn-customized-light').on('click', function (e) {
+                e.preventDefault();
+                $('.sidebar').addClass('light');
+            });
+
+            /*Navigation*/
+            $('a.scroll-link').on('click', function (e) {
+                e.preventDefault();
+                scroll_to($(this), 0);
+            });
+
+            $('.to-top a').on('click', function (e) {
+                e.preventDefault();
+                if ($(window).scrollTop() != 0) {
+                    $('html, body').stop().animate({
+                        scrollTop: 0
+                    }, 1000);
+                }
+            });
+
+            new WOW().init();
+        });
     </script>
 </body>
 
